@@ -186,9 +186,7 @@ function QuestionField({
 									key={opt}
 									className={cn(
 										"flex items-center gap-3 p-3 rounded-lg border cursor-pointer transition-all",
-										selected
-											? "border-brand bg-brand/10"
-											: "border-border hover:border-brand/40",
+										selected ? "border-brand bg-brand/10" : "border-border hover:border-brand/40",
 									)}
 								>
 									<input

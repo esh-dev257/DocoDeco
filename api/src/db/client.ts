@@ -26,7 +26,13 @@ export function formatQuestion(row: Record<string, unknown>) {
 		label: row.label as string,
 		required: row.required === 1,
 		orderIndex: row.order_index as number,
-		config: (() => { try { return JSON.parse((row.config as string) || "{}") } catch { return {} } })(),
+		config: (() => {
+			try {
+				return JSON.parse((row.config as string) || "{}")
+			} catch {
+				return {}
+			}
+		})(),
 		createdAt: row.created_at as number,
 	}
 }
