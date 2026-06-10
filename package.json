@@ -1,0 +1,13 @@
+{
+	"name": "docodego-survey",
+	"private": true,
+	"scripts": {
+		"dev": "pnpm -r --parallel dev",
+		"check": "biome check .",
+		"check:fix": "biome check --write .",
+		"typecheck": "pnpm -r typecheck"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "1.9.4"
+	}
+}
