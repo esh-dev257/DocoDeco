@@ -25,7 +25,7 @@ export const surveyRoutes = new Hono<Env>()
 // All survey routes require authentication
 surveyRoutes.use("/*", authMiddleware)
 
-// GET / — List user's surveys with response counts
+// GET /- List user's surveys with response counts
 surveyRoutes.get("/", async (c) => {
 	const userId = c.get("userId")
 	const db = c.env.DB
@@ -45,7 +45,7 @@ surveyRoutes.get("/", async (c) => {
 	return c.json({ surveys: results.map(formatSurvey) })
 })
 
-// POST / — Create a new survey
+// POST /- Create a new survey
 surveyRoutes.post("/", async (c) => {
 	const body = await c.req.json().catch(() => null)
 	if (!body) return c.json({ error: "Invalid JSON body" }, 400)
@@ -69,7 +69,7 @@ surveyRoutes.post("/", async (c) => {
 	return c.json(formatSurvey(survey), 201)
 })
 
-// GET /:id — Get survey with questions (must own)
+// GET /:id- Get survey with questions (must own)
 surveyRoutes.get("/:id", async (c) => {
 	const surveyId = c.req.param("id")
 	const userId = c.get("userId")
@@ -95,7 +95,7 @@ surveyRoutes.get("/:id", async (c) => {
 	})
 })
 
-// PATCH /:id — Update survey (must own)
+// PATCH /:id- Update survey (must own)
 surveyRoutes.patch("/:id", async (c) => {
 	const surveyId = c.req.param("id")
 	const userId = c.get("userId")
@@ -158,7 +158,7 @@ surveyRoutes.patch("/:id", async (c) => {
 	return c.json(formatSurvey(survey))
 })
 
-// DELETE /:id — Delete survey (CASCADE deletes questions + responses)
+// DELETE /:id- Delete survey (CASCADE deletes questions + responses)
 surveyRoutes.delete("/:id", async (c) => {
 	const surveyId = c.req.param("id")
 	const userId = c.get("userId")

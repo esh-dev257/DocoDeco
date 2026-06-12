@@ -9,7 +9,7 @@ import type { Env } from "./types"
 
 const app = new Hono<Env>()
 
-// CORS for local dev — frontend on :5173, API on :8787
+// CORS for local dev- frontend on :5173, API on :8787
 app.use(
 	"/api/*",
 	cors({
@@ -19,7 +19,7 @@ app.use(
 	}),
 )
 
-// Health check — confirms D1 binding works
+// Health check- confirms D1 binding works
 app.get("/api/health", async (c) => {
 	try {
 		const result = await c.env.DB.prepare("SELECT 1 as ok").first()

@@ -5,7 +5,7 @@ import type { Env } from "../types"
 
 export const publicRoutes = new Hono<Env>()
 
-// GET /:shareToken — Get public survey with questions (no auth required)
+// GET /:shareToken- Get public survey with questions (no auth required)
 // Decision: Use share_token instead of survey.id so we can revoke access
 // without deleting the survey (regenerate token or set is_active=false)
 publicRoutes.get("/:shareToken", async (c) => {
@@ -30,7 +30,7 @@ publicRoutes.get("/:shareToken", async (c) => {
 	})
 })
 
-// POST /:shareToken/respond — Submit survey response (no auth required)
+// POST /:shareToken/respond- Submit survey response (no auth required)
 publicRoutes.post("/:shareToken/respond", async (c) => {
 	const shareToken = c.req.param("shareToken")
 	const db = c.env.DB

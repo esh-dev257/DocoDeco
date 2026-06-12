@@ -4,7 +4,7 @@ import { z } from "zod"
 import { authMiddleware } from "../middleware/auth"
 import type { Env } from "../types"
 
-// Decision: Simple email-only auth — no password, no magic link.
+// Decision: Simple email-only auth- no password, no magic link.
 // User enters email → backend creates user if not exists → returns JWT.
 // Fast to build, easy to demo, easy to explain in walkthrough.
 
@@ -14,7 +14,7 @@ const loginSchema = z.object({
 
 export const authRoutes = new Hono<Env>()
 
-// POST /login — Create user if not exists, return JWT
+// POST /login- Create user if not exists, return JWT
 authRoutes.post("/login", async (c) => {
 	const body = await c.req.json().catch(() => null)
 	if (!body) return c.json({ error: "Invalid JSON body" }, 400)
@@ -27,7 +27,7 @@ authRoutes.post("/login", async (c) => {
 	const { email } = parsed.data
 	const db = c.env.DB
 
-	// Upsert user — check existence first, create if needed
+	// Upsert user- check existence first, create if needed
 	let user = await db
 		.prepare("SELECT id, email, created_at FROM users WHERE email = ?")
 		.bind(email)
@@ -42,7 +42,7 @@ authRoutes.post("/login", async (c) => {
 		if (!user) return c.json({ error: "Failed to create user" }, 500)
 	}
 
-	// Sign JWT — 7 day expiry, HS256
+	// Sign JWT- 7 day expiry, HS256
 	const secret = new TextEncoder().encode(c.env.JWT_SECRET)
 	const token = await new SignJWT({ email: user.email as string })
 		.setSubject(user.id as string)
@@ -61,12 +61,12 @@ authRoutes.post("/login", async (c) => {
 	})
 })
 
-// POST /logout — Client clears token; server-side is a no-op
+// POST /logout- Client clears token; server-side is a no-op
 authRoutes.post("/logout", (c) => {
 	return c.json({ success: true })
 })
 
-// GET /me — Return current user from JWT (requires auth)
+// GET /me- Return current user from JWT (requires auth)
 authRoutes.get("/me", authMiddleware, async (c) => {
 	const userId = c.get("userId")
 	const db = c.env.DB

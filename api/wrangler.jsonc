@@ -1,11 +1,11 @@
 {
-	// DoCoDeGo API — Cloudflare Worker config
+	// DoCoDeGo API- Cloudflare Worker config
 	"name": "docodego-api",
 	"main": "src/index.ts",
 	"compatibility_date": "2024-11-01",
 	"compatibility_flags": ["nodejs_compat"],
 
-	// D1 database binding — local dev uses .wrangler/state for persistence
+	// D1 database binding- local dev uses .wrangler/state for persistence
 	"d1_databases": [
 		{
 			"binding": "DB",
@@ -14,7 +14,7 @@
 		}
 	],
 
-	// Environment variables — JWT_SECRET should be overridden in production
+	// Environment variables- JWT_SECRET should be overridden in production
 	"vars": {
 		"JWT_SECRET": "dev-secret-change-in-production-docodego-2024"
 	}

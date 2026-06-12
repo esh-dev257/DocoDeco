@@ -10,20 +10,26 @@ interface BrandingPanelProps {
 	onSurveyChange: (survey: Survey) => void
 }
 
-// Decision: native <input type="color"> for the color picker — no external lib needed,
+// Decision: native <input type="color"> for the color picker- no external lib needed,
 // zero JS overhead, and it's immediately explainable in the interview.
 export function BrandingPanel({ survey, onSurveyChange }: BrandingPanelProps) {
 	const [color, setColor] = useState(survey.brandColor)
 	const [logoUrl, setLogoUrl] = useState(survey.brandLogoUrl ?? "")
 	const [saving, setSaving] = useState(false)
 
-	async function save(overrides?: { brandColor?: string; brandLogoUrl?: string | null }) {
+	async function save(overrides?: {
+		brandColor?: string
+		brandLogoUrl?: string | null
+	}) {
 		const brandColor = overrides?.brandColor ?? color
 		const brandLogoUrl =
 			overrides?.brandLogoUrl !== undefined ? overrides.brandLogoUrl : logoUrl || null
 		setSaving(true)
 		try {
-			const updated = await api.updateSurvey(survey.id, { brandColor, brandLogoUrl })
+			const updated = await api.updateSurvey(survey.id, {
+				brandColor,
+				brandLogoUrl,
+			})
 			onSurveyChange(updated)
 			toast.success("Branding saved")
 		} catch {

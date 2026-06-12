@@ -4,7 +4,7 @@ import { formatQuestion } from "../db/client"
 import { authMiddleware } from "../middleware/auth"
 import type { Env } from "../types"
 
-// Decision: Store question config as JSON column — simpler than separate tables
+// Decision: Store question config as JSON column- simpler than separate tables
 // per question type. {options:[...]} for MC, {max:5} for rating, {} for short_text.
 // Trade-off: can't query config fields in SQL, but we never need to since
 // config is always loaded with the question.
@@ -42,7 +42,7 @@ async function verifySurveyOwnership(db: D1Database, surveyId: string, userId: s
 	return !!survey
 }
 
-// POST /:id/questions — Add a question to a survey
+// POST /:id/questions- Add a question to a survey
 questionRoutes.post("/:id/questions", async (c) => {
 	const surveyId = c.req.param("id")
 	const userId = c.get("userId")
@@ -83,7 +83,7 @@ questionRoutes.post("/:id/questions", async (c) => {
 	return c.json(formatQuestion(question), 201)
 })
 
-// PATCH /:id/questions/:qid — Update a question
+// PATCH /:id/questions/:qid- Update a question
 questionRoutes.patch("/:id/questions/:qid", async (c) => {
 	const surveyId = c.req.param("id")
 	const questionId = c.req.param("qid")
@@ -145,7 +145,7 @@ questionRoutes.patch("/:id/questions/:qid", async (c) => {
 	return c.json(formatQuestion(question))
 })
 
-// DELETE /:id/questions/:qid — Delete a question
+// DELETE /:id/questions/:qid- Delete a question
 questionRoutes.delete("/:id/questions/:qid", async (c) => {
 	const surveyId = c.req.param("id")
 	const questionId = c.req.param("qid")
@@ -166,7 +166,7 @@ questionRoutes.delete("/:id/questions/:qid", async (c) => {
 	return c.body(null, 204)
 })
 
-// POST /:id/questions/reorder — Reorder questions by providing ordered ID array
+// POST /:id/questions/reorder- Reorder questions by providing ordered ID array
 questionRoutes.post("/:id/questions/reorder", async (c) => {
 	const surveyId = c.req.param("id")
 	const userId = c.get("userId")

@@ -17,7 +17,7 @@ export function clearToken(): void {
 }
 
 // Decision: Decode JWT client-side to extract user info without a network request.
-// The JWT is still verified server-side on every API call — this is just for
+// The JWT is still verified server-side on every API call- this is just for
 // quick UI rendering (user email, protected route guards).
 function decodeJwtPayload(token: string): { sub: string; email: string; exp?: number } | null {
 	try {
@@ -28,7 +28,7 @@ function decodeJwtPayload(token: string): { sub: string; email: string; exp?: nu
 	}
 }
 
-// Check if user is authenticated (for route guards — no hook needed)
+// Check if user is authenticated (for route guards- no hook needed)
 export function isAuthenticated(): boolean {
 	const token = getToken()
 	if (!token) return false
@@ -43,7 +43,7 @@ export function isAuthenticated(): boolean {
 	return true
 }
 
-// useAuth hook — provides user state, login, and logout for components
+// useAuth hook- provides user state, login, and logout for components
 export function useAuth() {
 	const [user, setUser] = useState<User | null>(null)
 	const [isLoading, setIsLoading] = useState(true)

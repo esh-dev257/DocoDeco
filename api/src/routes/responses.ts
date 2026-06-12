@@ -6,7 +6,7 @@ export const responseRoutes = new Hono<Env>()
 
 responseRoutes.use("/*", authMiddleware)
 
-// GET /:id/responses — List all responses with answers for a survey (must own)
+// GET /:id/responses- List all responses with answers for a survey (must own)
 responseRoutes.get("/:id/responses", async (c) => {
 	const surveyId = c.req.param("id")
 	const userId = c.get("userId")

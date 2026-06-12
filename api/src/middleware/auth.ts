@@ -2,7 +2,7 @@ import { createMiddleware } from "hono/factory"
 import { jwtVerify } from "jose"
 import type { Env } from "../types"
 
-// Decision: Simple JWT auth — no magic link, no password, no email verification.
+// Decision: Simple JWT auth- no magic link, no password, no email verification.
 // Trade-off: anyone can claim any email (no verification step), but this is
 // acceptable for a demo/take-home. In production, add email verification.
 // JWT is verified on every protected request using the HS256 algorithm.

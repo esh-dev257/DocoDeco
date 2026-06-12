@@ -75,7 +75,7 @@ export function PublicSurveyForm({
 	return (
 		<div className="min-h-screen bg-background py-12 px-4">
 			<div className="max-w-xl mx-auto animate-in">
-				{/* Survey header — brand color accent + logo */}
+				{/* Survey header- brand color accent + logo */}
 				<div className="mb-8 pb-6" style={{ borderBottom: `2px solid ${survey.brandColor}` }}>
 					{survey.brandLogoUrl && (
 						<img
@@ -237,7 +237,10 @@ function QuestionField({
 										)}
 										style={
 											selected
-												? { backgroundColor: brandColor, borderColor: brandColor }
+												? {
+														backgroundColor: brandColor,
+														borderColor: brandColor,
+													}
 												: undefined
 										}
 									>

@@ -14,7 +14,7 @@ interface QuestionEditorProps {
 	onUpdate: (question: Question) => void
 }
 
-// Sub-component for each MC option — local draft state avoids stale closure issues
+// Sub-component for each MC option- local draft state avoids stale closure issues
 // when the parent's config state hasn't batched yet.
 function OptionInput({
 	initialValue,
@@ -103,7 +103,7 @@ export function QuestionEditor({ surveyId, question, onUpdate }: QuestionEditorP
 		save({ required: next })
 	}
 
-	// MC: pass computed options directly to save — never reads stale state
+	// MC: pass computed options directly to save- never reads stale state
 	function handleOptionSave(index: number, newValue: string) {
 		const next = mcOptions.map((o, i) => (i === index ? newValue : o))
 		setMcOptions(next)

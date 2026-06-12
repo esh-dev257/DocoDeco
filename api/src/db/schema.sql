@@ -1,4 +1,4 @@
--- DoCoDeGo Survey Builder — D1 Schema
+-- DoCoDeGo Survey Builder- D1 Schema
 -- Decision: 5 normalized tables. Question config stored as JSON column for flexibility
 -- without needing separate tables per question type.
 
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS questions (
   label TEXT NOT NULL,
   required INTEGER NOT NULL DEFAULT 0,
   order_index INTEGER NOT NULL DEFAULT 0,
-  -- Decision: JSON column for question config — {options:[...]} for MC, {max:5} for rating.
+  -- Decision: JSON column for question config- {options:[...]} for MC, {max:5} for rating.
   -- Simpler than separate tables, flexible for future question types.
   -- Trade-off: can't query config fields in SQL, but we never need to.
   config TEXT NOT NULL DEFAULT '{}',

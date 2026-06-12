@@ -21,7 +21,7 @@ interface SurveyBuilderProps {
 // Decision: Two-panel builder layout.
 // Left: ordered question list with type badges and up/down reorder (cleaner than
 // drag-and-drop without @dnd-kit and still fully functional).
-// Right: tabbed editor — "Question" for editing selected question, "Branding" for colors/logo.
+// Right: tabbed editor- "Question" for editing selected question, "Branding" for colors/logo.
 // Title is inline-editable on click.
 export function SurveyBuilder({ survey, onSurveyChange }: SurveyBuilderProps) {
 	const [questions, setQuestions] = useState<Question[]>(survey.questions)
@@ -255,7 +255,7 @@ export function SurveyBuilder({ survey, onSurveyChange }: SurveyBuilderProps) {
 						))
 					)}
 
-					{/* Add question buttons — one per type */}
+					{/* Add question buttons- one per type */}
 					<div className="grid grid-cols-3 gap-1.5 pt-1">
 						{QUESTION_TYPES.map(({ type, icon, label }) => (
 							<button
