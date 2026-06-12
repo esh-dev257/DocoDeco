@@ -1,4 +1,5 @@
 import { Link, Outlet, createFileRoute, redirect, useNavigate } from "@tanstack/react-router"
+import { Wordmark } from "~/components/ui/wordmark"
 import { isAuthenticated, useAuth } from "~/lib/auth"
 
 // Decision: dashboard.tsx is a layout route- its component wraps all /dashboard/*
@@ -21,20 +22,19 @@ function DashboardLayout() {
 
 	return (
 		<div className="min-h-screen gradient-mesh">
-			<header className="sticky top-0 z-50 bg-foreground border-b-4 border-foreground">
-				<div className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
-					<Link
-						to="/dashboard"
-						className="font-bold text-xl text-primary tracking-tight hover:opacity-80 transition-opacity"
-					>
-						DoCoDeGo ✦
+			<header className="sticky top-0 z-50 bg-background border-b-4 border-foreground">
+				<div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
+					<Link to="/dashboard" aria-label="DoCoDeGo — Home">
+						<Wordmark size="sm" />
 					</Link>
-					<div className="flex items-center gap-4">
-						<span className="text-sm text-white/60 hidden sm:block">{user?.email}</span>
+					<div className="flex items-center gap-3">
+						<span className="text-xs font-mono text-muted-foreground hidden sm:block truncate max-w-48">
+							{user?.email}
+						</span>
 						<button
 							type="button"
 							onClick={handleLogout}
-							className="text-sm font-bold border-2 border-primary text-primary px-3 py-1 hover:bg-primary hover:text-foreground transition-all"
+							className="text-xs font-black uppercase tracking-wide border-2 border-foreground px-3 py-1.5 bg-background shadow-nb-sm hover:bg-do hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none transition-none"
 						>
 							Sign out
 						</button>

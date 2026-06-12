@@ -10,14 +10,18 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const variants = {
+	// Black bg + yellow shadow — docodego.com primary CTA style
 	default:
-		"bg-primary text-primary-foreground border-2 border-foreground shadow-[3px_3px_0_#0a0a0a] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[1px_1px_0_#0a0a0a] active:translate-x-[3px] active:translate-y-[3px] active:shadow-none",
+		"bg-foreground text-background border-2 border-foreground shadow-do hover:translate-x-1 hover:translate-y-1 hover:shadow-none active:translate-x-1 active:translate-y-1",
+	// White bg + black shadow
 	secondary:
-		"bg-secondary text-secondary-foreground border-2 border-foreground shadow-[3px_3px_0_#0a0a0a] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[1px_1px_0_#0a0a0a]",
+		"bg-background text-foreground border-2 border-foreground shadow-nb hover:translate-x-1 hover:translate-y-1 hover:shadow-none",
+	// Rose bg + black shadow
 	destructive:
-		"bg-destructive text-destructive-foreground border-2 border-foreground shadow-[3px_3px_0_#0a0a0a] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[1px_1px_0_#0a0a0a]",
+		"bg-destructive text-destructive-foreground border-2 border-foreground shadow-nb hover:translate-x-1 hover:translate-y-1 hover:shadow-none",
+	// White bg + small black shadow
 	outline:
-		"bg-transparent border-2 border-foreground shadow-[3px_3px_0_#0a0a0a] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[1px_1px_0_#0a0a0a] hover:bg-muted",
+		"bg-background border-2 border-foreground shadow-nb-sm hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none hover:bg-muted",
 	ghost: "hover:bg-muted border-2 border-transparent",
 }
 
@@ -34,8 +38,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 			<button
 				ref={ref}
 				className={cn(
-					"inline-flex items-center justify-center gap-2 rounded-md font-bold",
-					"transition-all duration-100 ease-out",
+					"inline-flex items-center justify-center gap-2 font-black uppercase tracking-wide text-xs",
+					"transition-none",
 					"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
 					"disabled:pointer-events-none disabled:opacity-50",
 					"cursor-pointer",

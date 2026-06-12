@@ -1,38 +1,57 @@
 @import "tailwindcss";
 
-/* ─── Design System: Neo-Brutalism ───────────────────────────────────
-   Cream base, pure black borders, hard offset shadows, zero blur.
-   Space Grotesk font. Yellow primary, black everything else.
+/* ─── Design System: DoCoDeGo Official Palette ───────────────────────
+   Mirrors docodego.com exactly.
+   DO = #FFB800 (amber), CO = #3B82F6 (blue), DE = #F43F5E (rose), GO = #10B981 (emerald)
+   Paper = #FFFFFF, Ink = #000000. Inter + JetBrains Mono.
+   Hard offset shadows, zero border radius, thick black borders.
    --color-brand is dynamically overridden on the public survey page.
 ──────────────────────────────────────────────────────────────────────── */
 
 @theme {
-	--font-sans: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+	--font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+	--font-mono: "JetBrains Mono", ui-monospace, monospace;
 
-	--color-background: #fffef2;
-	--color-foreground: #0a0a0a;
+	--color-background: #ffffff;
+	--color-foreground: #000000;
 	--color-card: #ffffff;
-	--color-card-foreground: #0a0a0a;
-	--color-primary: #f5e642;
-	--color-primary-foreground: #0a0a0a;
+	--color-card-foreground: #000000;
+
+	/* Primary = DO yellow */
+	--color-primary: #ffb800;
+	--color-primary-foreground: #000000;
+
 	--color-secondary: #ffffff;
-	--color-secondary-foreground: #0a0a0a;
-	--color-muted: #f0efe6;
-	--color-muted-foreground: #555555;
-	--color-accent: #e8f542;
-	--color-accent-foreground: #0a0a0a;
-	--color-destructive: #ff3333;
-	--color-destructive-foreground: #ffffff;
-	--color-border: #0a0a0a;
+	--color-secondary-foreground: #000000;
+
+	--color-muted: #fafafa;
+	--color-muted-foreground: #666666;
+
+	--color-accent: #ffb800;
+	--color-accent-foreground: #000000;
+
+	/* DE rose as destructive */
+	--color-destructive: #f43f5e;
+	--color-destructive-foreground: #000000;
+
+	--color-border: #000000;
 	--color-input: #ffffff;
-	--color-ring: #f5e642;
+	--color-ring: #ffb800;
 
-	--color-brand: #f5e642;
+	/* Pillar colors */
+	--color-do: #ffb800;
+	--color-co: #3b82f6;
+	--color-de: #f43f5e;
+	--color-go: #10b981;
 
-	--radius-sm: 2px;
-	--radius-md: 4px;
-	--radius-lg: 6px;
-	--radius-xl: 8px;
+	/* Brand color — overridden per survey on public pages */
+	--color-brand: #ffb800;
+
+	/* Sharp corners everywhere */
+	--radius-sm: 0px;
+	--radius-md: 0px;
+	--radius-lg: 0px;
+	--radius-xl: 0px;
 }
 
 /* ─── Base ─────────────────────────────────────────────────────────── */
@@ -65,12 +84,33 @@ body {
 	animation: fadeIn 0.2s ease-out;
 }
 
-/* ─── Neo-brutalist card (replaces glassmorphism) ──────────────────── */
+/* ─── Named shadow utilities (mirror docodego.com naming) ──────────── */
+
+.shadow-nb {
+	box-shadow: 4px 4px 0 #000000;
+}
+.shadow-nb-sm {
+	box-shadow: 2px 2px 0 #000000;
+}
+.shadow-nb-lg {
+	box-shadow: 6px 6px 0 #000000;
+}
+.shadow-nb-xl {
+	box-shadow: 8px 8px 0 #000000;
+}
+.shadow-do {
+	box-shadow: 4px 4px 0 #ffb800;
+}
+.shadow-do-sm {
+	box-shadow: 2px 2px 0 #ffb800;
+}
+
+/* ─── Glass card — neo-brutalist panel (thick border + hard shadow) ── */
 
 .glass {
 	background: #ffffff;
-	border: 2px solid #0a0a0a;
-	box-shadow: 4px 4px 0 #0a0a0a;
+	border: 4px solid #000000;
+	box-shadow: 4px 4px 0 #000000;
 }
 
 /* ─── Page background ──────────────────────────────────────────────── */
@@ -83,20 +123,20 @@ body {
 
 .brand-button {
 	background-color: var(--color-brand);
-	color: #0a0a0a;
+	color: #000000;
 	font-weight: 700;
-	border: 2px solid #0a0a0a;
-	box-shadow: 3px 3px 0 #0a0a0a;
+	border: 2px solid #000000;
+	box-shadow: 3px 3px 0 #000000;
 	transition: all 0.1s ease;
 }
 
 .brand-button:hover {
-	transform: translate(2px, 2px);
-	box-shadow: 1px 1px 0 #0a0a0a;
+	transform: translate(4px, 4px);
+	box-shadow: none;
 }
 
 .brand-ring:focus-visible {
-	outline: 2px solid #0a0a0a;
+	outline: 2px solid var(--color-brand);
 	outline-offset: 2px;
 }
 
@@ -108,17 +148,17 @@ body {
 
 ::-webkit-scrollbar-track {
 	background: var(--color-background);
-	border-left: 1px solid #0a0a0a;
+	border-left: 1px solid #000000;
 }
 
 ::-webkit-scrollbar-thumb {
-	background: #0a0a0a;
+	background: #000000;
 }
 
 /* ─── Toast ────────────────────────────────────────────────────────── */
 
 [data-sonner-toaster] {
 	--normal-bg: #ffffff;
-	--normal-text: #0a0a0a;
-	--normal-border: #0a0a0a;
+	--normal-text: #000000;
+	--normal-border: #000000;
 }

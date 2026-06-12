@@ -57,7 +57,7 @@ function DashboardIndex() {
 	if (loading) {
 		return (
 			<div className="flex items-center justify-center h-64">
-				<p className="text-muted-foreground text-sm font-bold uppercase tracking-wide">
+				<p className="text-muted-foreground text-xs font-mono uppercase tracking-widest">
 					Loading surveys…
 				</p>
 			</div>
@@ -66,50 +66,53 @@ function DashboardIndex() {
 
 	return (
 		<div className="animate-in">
-			<div className="flex items-center justify-between mb-8">
+			{/* Header */}
+			<div className="flex items-start sm:items-center justify-between mb-8 gap-4">
 				<div>
-					<h1 className="text-3xl font-black text-foreground">Your Surveys</h1>
-					<p className="text-sm mt-0.5 font-bold text-muted-foreground uppercase tracking-wide">
+					<div className="inline-block bg-black text-white px-2.5 py-0.5 text-[10px] font-mono uppercase tracking-widest border-2 border-black mb-2">
+						Your workspace
+					</div>
+					<h1 className="text-3xl sm:text-4xl font-black text-foreground tracking-tight leading-tight">
+						Surveys
+					</h1>
+					<p className="text-xs font-mono text-muted-foreground mt-1 uppercase tracking-widest">
 						{surveys.length} survey{surveys.length !== 1 ? "s" : ""}
 					</p>
 				</div>
 				<button
 					type="button"
 					onClick={() => setShowCreate(true)}
-					className="h-10 px-5 font-black text-sm flex items-center gap-2 bg-primary text-foreground border-2 border-foreground transition-all hover:translate-x-0.5 hover:translate-y-0.5"
-					style={{ boxShadow: "3px 3px 0 #0a0a0a" }}
+					className="shrink-0 h-10 px-4 font-black text-xs uppercase tracking-wide flex items-center gap-2 bg-foreground text-background border-2 border-foreground shadow-do hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-none"
 				>
-					<Plus className="w-4 h-4" />
+					<Plus className="w-3.5 h-3.5" />
 					New Survey
 				</button>
 			</div>
 
+			{/* Create form */}
 			{showCreate && (
-				<div
-					className="mb-6 bg-white border-2 border-foreground p-4"
-					style={{ boxShadow: "4px 4px 0 #0a0a0a" }}
-				>
+				<div className="mb-6 bg-background border-4 border-foreground p-4 shadow-nb">
+					<div className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground mb-3">
+						New survey
+					</div>
 					<form onSubmit={handleCreate} className="flex gap-2">
 						<Input
 							placeholder="Survey title…"
 							value={newTitle}
 							onChange={(e) => setNewTitle(e.target.value)}
 							autoFocus
-							className="flex-1 h-11 font-bold border-2 border-foreground rounded-none focus-visible:ring-0"
-							style={{ boxShadow: "2px 2px 0 #0a0a0a" }}
+							className="flex-1 h-10 font-bold border-2 border-foreground focus-visible:ring-0 shadow-nb-sm font-mono text-sm"
 						/>
 						<button
 							type="submit"
 							disabled={creating}
-							className="h-11 px-5 font-black text-sm bg-primary text-foreground border-2 border-foreground disabled:opacity-50 transition-all hover:translate-x-0.5 hover:translate-y-0.5"
-							style={{ boxShadow: "2px 2px 0 #0a0a0a" }}
+							className="h-10 px-4 font-black text-xs uppercase tracking-wide bg-foreground text-background border-2 border-foreground disabled:opacity-50 shadow-do hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-none"
 						>
 							{creating ? "Creating…" : "Create"}
 						</button>
 						<button
 							type="button"
-							className="h-11 px-4 font-bold text-sm bg-muted text-foreground border-2 border-foreground transition-all hover:translate-x-0.5 hover:translate-y-0.5"
-							style={{ boxShadow: "2px 2px 0 #0a0a0a" }}
+							className="h-10 px-4 font-black text-xs uppercase tracking-wide bg-background text-foreground border-2 border-foreground shadow-nb-sm hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none transition-none"
 							onClick={() => {
 								setShowCreate(false)
 								setNewTitle("")
@@ -121,25 +124,26 @@ function DashboardIndex() {
 				</div>
 			)}
 
+			{/* Empty state */}
 			{surveys.length === 0 ? (
-				<div
-					className="text-center py-24 bg-white border-2 border-foreground"
-					style={{ boxShadow: "6px 6px 0 #0a0a0a" }}
-				>
-					<div className="text-6xl mb-4">📋</div>
-					<h2 className="text-xl font-black mb-2 text-foreground">No surveys yet</h2>
-					<p className="text-sm mb-6 font-bold text-muted-foreground">
-						Create your first survey to start collecting responses
-					</p>
-					<button
-						type="button"
-						onClick={() => setShowCreate(true)}
-						className="h-10 px-6 font-black text-sm inline-flex items-center gap-2 bg-primary text-foreground border-2 border-foreground transition-all hover:translate-x-0.5 hover:translate-y-0.5"
-						style={{ boxShadow: "3px 3px 0 #0a0a0a" }}
-					>
-						<Plus className="w-4 h-4" />
-						Create Survey
-					</button>
+				<div className="border-4 border-foreground bg-background shadow-nb-xl">
+					<div className="text-center py-20 px-6">
+						<div className="inline-flex items-center justify-center w-16 h-16 border-4 border-foreground bg-do text-black text-2xl font-black mb-6 shadow-nb">
+							📋
+						</div>
+						<h2 className="text-2xl font-black mb-2 text-foreground">No surveys yet</h2>
+						<p className="text-sm font-mono text-muted-foreground mb-8 max-w-xs mx-auto">
+							Create your first survey to start collecting responses.
+						</p>
+						<button
+							type="button"
+							onClick={() => setShowCreate(true)}
+							className="h-10 px-6 font-black text-xs uppercase tracking-wide inline-flex items-center gap-2 bg-foreground text-background border-2 border-foreground shadow-do hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-none"
+						>
+							<Plus className="w-3.5 h-3.5" />
+							Create Survey
+						</button>
+					</div>
 				</div>
 			) : (
 				<div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -162,38 +166,42 @@ function SurveyCard({
 	const shareUrl = `${window.location.origin}/s/${survey.shareToken}`
 
 	return (
-		<div
-			className="bg-white border-2 border-foreground flex flex-col"
-			style={{ boxShadow: "4px 4px 0 #0a0a0a" }}
-		>
-			{/* Brand color strip */}
+		<div className="bg-background border-4 border-foreground flex flex-col shadow-nb hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[3px_3px_0_#000] transition-none">
+			{/* Brand color strip — header */}
 			<div
-				className="px-5 pt-5 pb-4 border-b-2 border-foreground"
+				className="px-4 pt-4 pb-3 border-b-4 border-foreground"
 				style={{ background: `${survey.brandColor}22` }}
 			>
-				<div className="flex items-start justify-between gap-2">
+				<div className="flex items-start justify-between gap-2 mb-3">
 					<div
-						className="w-10 h-10 flex items-center justify-center text-white text-lg font-black mb-3 shrink-0 border-2 border-foreground"
-						style={{ background: survey.brandColor, boxShadow: "2px 2px 0 #0a0a0a" }}
+						className="w-10 h-10 flex items-center justify-center text-white text-lg font-black shrink-0 border-2 border-foreground shadow-nb-sm"
+						style={{ background: survey.brandColor }}
 					>
 						{survey.title[0]?.toUpperCase()}
 					</div>
 					{!survey.isActive && (
-						<Badge variant="secondary" className="text-xs rounded-none border border-foreground">
+						<Badge
+							variant="secondary"
+							className="text-[10px] font-mono uppercase tracking-wider border border-foreground"
+						>
 							Inactive
 						</Badge>
 					)}
 				</div>
-				<h3 className="font-black text-base truncate text-foreground">{survey.title}</h3>
+				<h3 className="font-black text-sm tracking-tight text-foreground truncate">
+					{survey.title}
+				</h3>
 				{survey.description && (
-					<p className="text-xs mt-0.5 line-clamp-1 text-muted-foreground">{survey.description}</p>
+					<p className="text-xs mt-0.5 line-clamp-1 text-muted-foreground font-mono">
+						{survey.description}
+					</p>
 				)}
 			</div>
 
 			{/* Card body */}
-			<div className="px-5 pb-5 pt-3 flex flex-col gap-4 flex-1">
-				<div className="flex items-center gap-1.5 text-xs font-bold text-muted-foreground uppercase tracking-wide">
-					<BarChart2 className="w-3.5 h-3.5" />
+			<div className="px-4 pb-4 pt-3 flex flex-col gap-3 flex-1">
+				<div className="flex items-center gap-1.5 text-[10px] font-mono text-muted-foreground uppercase tracking-widest">
+					<BarChart2 className="w-3 h-3" />
 					<span>
 						{survey.responseCount ?? 0} response{(survey.responseCount ?? 0) !== 1 ? "s" : ""}
 					</span>
@@ -204,8 +212,7 @@ function SurveyCard({
 					<Link to="/dashboard/$surveyId/edit" params={{ surveyId: survey.id }} className="flex-1">
 						<button
 							type="button"
-							className="w-full h-9 font-black text-sm bg-primary text-foreground border-2 border-foreground transition-all hover:translate-x-0.5 hover:translate-y-0.5"
-							style={{ boxShadow: "2px 2px 0 #0a0a0a" }}
+							className="w-full h-9 font-black text-xs uppercase tracking-wide bg-foreground text-background border-2 border-foreground shadow-do-sm hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none transition-none"
 						>
 							Edit
 						</button>
@@ -213,31 +220,28 @@ function SurveyCard({
 					<Link to="/dashboard/$surveyId/responses" params={{ surveyId: survey.id }}>
 						<button
 							type="button"
-							className="h-9 w-9 flex items-center justify-center bg-muted text-foreground border-2 border-foreground transition-all hover:translate-x-0.5 hover:translate-y-0.5"
-							style={{ boxShadow: "2px 2px 0 #0a0a0a" }}
+							className="h-9 w-9 flex items-center justify-center bg-background border-2 border-foreground shadow-nb-sm hover:bg-do hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none transition-none"
 							title="View responses"
 						>
-							<BarChart2 className="w-4 h-4" />
+							<BarChart2 className="w-3.5 h-3.5" />
 						</button>
 					</Link>
 					<a href={shareUrl} target="_blank" rel="noopener noreferrer">
 						<button
 							type="button"
-							className="h-9 w-9 flex items-center justify-center bg-muted text-foreground border-2 border-foreground transition-all hover:translate-x-0.5 hover:translate-y-0.5"
-							style={{ boxShadow: "2px 2px 0 #0a0a0a" }}
+							className="h-9 w-9 flex items-center justify-center bg-background border-2 border-foreground shadow-nb-sm hover:bg-co hover:text-white hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none transition-none"
 							title="Open public survey"
 						>
-							<ExternalLink className="w-4 h-4" />
+							<ExternalLink className="w-3.5 h-3.5" />
 						</button>
 					</a>
 					<button
 						type="button"
-						className="h-9 w-9 flex items-center justify-center bg-destructive text-white border-2 border-foreground transition-all hover:translate-x-0.5 hover:translate-y-0.5"
-						style={{ boxShadow: "2px 2px 0 #0a0a0a" }}
+						className="h-9 w-9 flex items-center justify-center bg-background border-2 border-foreground shadow-nb-sm hover:bg-de hover:text-white hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none transition-none"
 						onClick={() => onDelete(survey.id)}
 						title="Delete survey"
 					>
-						<Trash2 className="w-4 h-4" />
+						<Trash2 className="w-3.5 h-3.5" />
 					</button>
 				</div>
 			</div>
