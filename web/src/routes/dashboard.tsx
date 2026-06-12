@@ -1,7 +1,7 @@
 import { Link, Outlet, createFileRoute, redirect, useNavigate } from "@tanstack/react-router"
 import { isAuthenticated, useAuth } from "~/lib/auth"
 
-// Decision: dashboard.tsx is a layout route — its component wraps all /dashboard/*
+// Decision: dashboard.tsx is a layout route- its component wraps all /dashboard/*
 // children via <Outlet />. Auth guard here applies to every child route.
 export const Route = createFileRoute("/dashboard")({
 	beforeLoad: () => {
@@ -21,20 +21,20 @@ function DashboardLayout() {
 
 	return (
 		<div className="min-h-screen gradient-mesh">
-			<header className="border-b border-border/50 glass sticky top-0 z-50">
+			<header className="sticky top-0 z-50 bg-foreground border-b-4 border-foreground">
 				<div className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
 					<Link
 						to="/dashboard"
-						className="font-bold text-lg tracking-tight hover:text-primary transition-colors"
+						className="font-bold text-xl text-primary tracking-tight hover:opacity-80 transition-opacity"
 					>
-						DoCoDeGo
+						DoCoDeGo ✦
 					</Link>
 					<div className="flex items-center gap-4">
-						<span className="text-sm text-muted-foreground hidden sm:block">{user?.email}</span>
+						<span className="text-sm text-white/60 hidden sm:block">{user?.email}</span>
 						<button
 							type="button"
 							onClick={handleLogout}
-							className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+							className="text-sm font-bold border-2 border-primary text-primary px-3 py-1 hover:bg-primary hover:text-foreground transition-all"
 						>
 							Sign out
 						</button>

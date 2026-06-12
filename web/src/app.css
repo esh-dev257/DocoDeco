@@ -1,42 +1,41 @@
 @import "tailwindcss";
 
-/* ─── Design System: Dark theme with violet accents ──────────────────
-   Decision: Tailwind v4 + custom CSS properties for a premium dark aesthetic.
-   Using Inter font, zinc-based neutrals, and violet as the primary accent.
-   The --brand variable is dynamically overridden on the public survey page
-   to match each survey owner's brand color.
+/* ─── Design System: Neo-Brutalism ───────────────────────────────────
+   Cream base, pure black borders, hard offset shadows, zero blur.
+   Space Grotesk font. Yellow primary, black everything else.
+   --color-brand is dynamically overridden on the public survey page.
 ──────────────────────────────────────────────────────────────────────── */
 
 @theme {
-	--font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+	--font-sans: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
 
-	--color-background: #09090b;
-	--color-foreground: #fafafa;
-	--color-card: #18181b;
-	--color-card-foreground: #fafafa;
-	--color-primary: #8b5cf6;
-	--color-primary-foreground: #ffffff;
-	--color-secondary: #27272a;
-	--color-secondary-foreground: #fafafa;
-	--color-muted: #27272a;
-	--color-muted-foreground: #a1a1aa;
-	--color-accent: #3f3f46;
-	--color-accent-foreground: #fafafa;
-	--color-destructive: #ef4444;
-	--color-destructive-foreground: #fafafa;
-	--color-border: #27272a;
-	--color-input: #27272a;
-	--color-ring: #8b5cf6;
+	--color-background: #fffef2;
+	--color-foreground: #0a0a0a;
+	--color-card: #ffffff;
+	--color-card-foreground: #0a0a0a;
+	--color-primary: #f5e642;
+	--color-primary-foreground: #0a0a0a;
+	--color-secondary: #ffffff;
+	--color-secondary-foreground: #0a0a0a;
+	--color-muted: #f0efe6;
+	--color-muted-foreground: #555555;
+	--color-accent: #e8f542;
+	--color-accent-foreground: #0a0a0a;
+	--color-destructive: #ff3333;
+	--color-destructive-foreground: #ffffff;
+	--color-border: #0a0a0a;
+	--color-input: #ffffff;
+	--color-ring: #f5e642;
 
-	--color-brand: #6366f1;
+	--color-brand: #f5e642;
 
-	--radius-sm: 0.375rem;
-	--radius-md: 0.5rem;
-	--radius-lg: 0.75rem;
-	--radius-xl: 1rem;
+	--radius-sm: 2px;
+	--radius-md: 4px;
+	--radius-lg: 6px;
+	--radius-xl: 8px;
 }
 
-/* ─── Base styles ──────────────────────────────────────────────────── */
+/* ─── Base ─────────────────────────────────────────────────────────── */
 
 * {
 	border-color: var(--color-border);
@@ -47,15 +46,14 @@ body {
 	color: var(--color-foreground);
 	font-family: var(--font-sans);
 	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
 }
 
-/* ─── Smooth page transitions ──────────────────────────────────────── */
+/* ─── Animate in ───────────────────────────────────────────────────── */
 
 @keyframes fadeIn {
 	from {
 		opacity: 0;
-		transform: translateY(8px);
+		transform: translateY(6px);
 	}
 	to {
 		opacity: 1;
@@ -64,66 +62,63 @@ body {
 }
 
 .animate-in {
-	animation: fadeIn 0.3s ease-out;
+	animation: fadeIn 0.2s ease-out;
 }
 
-/* ─── Glassmorphism card ───────────────────────────────────────────── */
+/* ─── Neo-brutalist card (replaces glassmorphism) ──────────────────── */
 
 .glass {
-	background: rgba(24, 24, 27, 0.8);
-	backdrop-filter: blur(12px);
-	border: 1px solid rgba(63, 63, 70, 0.5);
+	background: #ffffff;
+	border: 2px solid #0a0a0a;
+	box-shadow: 4px 4px 0 #0a0a0a;
 }
 
-/* ─── Gradient mesh background ─────────────────────────────────────── */
+/* ─── Page background ──────────────────────────────────────────────── */
 
 .gradient-mesh {
-	background: radial-gradient(at 20% 20%, rgba(139, 92, 246, 0.15) 0px, transparent 50%),
-		radial-gradient(at 80% 80%, rgba(99, 102, 241, 0.1) 0px, transparent 50%),
-		radial-gradient(at 50% 50%, rgba(168, 85, 247, 0.05) 0px, transparent 50%);
+	background: var(--color-background);
 }
 
-/* ─── Brand-colored elements (used in public survey page) ──────────── */
+/* ─── Brand-colored elements (public survey page) ──────────────────── */
 
 .brand-button {
 	background-color: var(--color-brand);
-	color: white;
-	transition: all 0.2s ease;
+	color: #0a0a0a;
+	font-weight: 700;
+	border: 2px solid #0a0a0a;
+	box-shadow: 3px 3px 0 #0a0a0a;
+	transition: all 0.1s ease;
 }
 
 .brand-button:hover {
-	filter: brightness(1.1);
-	box-shadow: 0 4px 20px color-mix(in srgb, var(--color-brand) 40%, transparent);
+	transform: translate(2px, 2px);
+	box-shadow: 1px 1px 0 #0a0a0a;
 }
 
 .brand-ring:focus-visible {
-	outline: 2px solid var(--color-brand);
+	outline: 2px solid #0a0a0a;
 	outline-offset: 2px;
 }
 
-/* ─── Scrollbar styling ────────────────────────────────────────────── */
+/* ─── Scrollbar ────────────────────────────────────────────────────── */
 
 ::-webkit-scrollbar {
-	width: 6px;
+	width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-	background: transparent;
+	background: var(--color-background);
+	border-left: 1px solid #0a0a0a;
 }
 
 ::-webkit-scrollbar-thumb {
-	background: #3f3f46;
-	border-radius: 3px;
+	background: #0a0a0a;
 }
 
-::-webkit-scrollbar-thumb:hover {
-	background: #52525b;
-}
-
-/* ─── Toast overrides for dark theme ───────────────────────────────── */
+/* ─── Toast ────────────────────────────────────────────────────────── */
 
 [data-sonner-toaster] {
-	--normal-bg: #27272a;
-	--normal-text: #fafafa;
-	--normal-border: #3f3f46;
+	--normal-bg: #ffffff;
+	--normal-text: #0a0a0a;
+	--normal-border: #0a0a0a;
 }
