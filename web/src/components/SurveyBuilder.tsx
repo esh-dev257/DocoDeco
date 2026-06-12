@@ -12,6 +12,7 @@ import { cn } from "~/lib/utils"
 import type { Question, QuestionType, Survey } from "~/types"
 
 type RightTab = "question" | "branding"
+type MobilePanel = "list" | "editor"
 
 interface SurveyBuilderProps {
 	survey: Survey & { questions: Question[] }
@@ -30,6 +31,7 @@ export function SurveyBuilder({ survey, onSurveyChange }: SurveyBuilderProps) {
 	const [titleEditing, setTitleEditing] = useState(false)
 	const [titleDraft, setTitleDraft] = useState(survey.title)
 	const [savingTitle, setSavingTitle] = useState(false)
+	const [mobilePanel, setMobilePanel] = useState<MobilePanel>("list")
 
 	const selectedQuestion = questions.find((q) => q.id === selectedId) ?? null
 
@@ -151,7 +153,7 @@ export function SurveyBuilder({ survey, onSurveyChange }: SurveyBuilderProps) {
 					<button
 						type="button"
 						onClick={() => setTitleEditing(true)}
-						className="font-semibold text-lg hover:text-muted-foreground transition-colors truncate max-w-xs text-left"
+						className="font-semibold text-lg hover:text-muted-foreground transition-colors truncate max-w-40 sm:max-w-xs text-left"
 						title="Click to rename"
 					>
 						{survey.title}
@@ -171,10 +173,46 @@ export function SurveyBuilder({ survey, onSurveyChange }: SurveyBuilderProps) {
 				</div>
 			</div>
 
+			{/* Mobile panel toggle */}
+			<div
+				className="flex md:hidden border-2 border-foreground mb-4"
+				style={{ boxShadow: "3px 3px 0 #0a0a0a" }}
+			>
+				<button
+					type="button"
+					onClick={() => setMobilePanel("list")}
+					className={cn(
+						"flex-1 py-2 text-sm font-bold transition-colors border-r-2 border-foreground",
+						mobilePanel === "list"
+							? "bg-primary text-foreground"
+							: "bg-white text-muted-foreground",
+					)}
+				>
+					Questions
+				</button>
+				<button
+					type="button"
+					onClick={() => setMobilePanel("editor")}
+					className={cn(
+						"flex-1 py-2 text-sm font-bold transition-colors",
+						mobilePanel === "editor"
+							? "bg-primary text-foreground"
+							: "bg-white text-muted-foreground",
+					)}
+				>
+					Editor
+				</button>
+			</div>
+
 			{/* Two-panel layout */}
-			<div className="flex gap-6 items-start">
+			<div className="flex flex-col md:flex-row gap-6 items-start">
 				{/* Left panel: question list */}
-				<div className="w-72 flex-shrink-0 flex flex-col gap-2">
+				<div
+					className={cn(
+						"w-full md:w-72 md:shrink-0 flex flex-col gap-2",
+						mobilePanel !== "list" && "hidden md:flex",
+					)}
+				>
 					{questions.length === 0 ? (
 						<div className="glass rounded-xl p-6 text-center text-sm text-muted-foreground">
 							No questions yet.
@@ -189,6 +227,7 @@ export function SurveyBuilder({ survey, onSurveyChange }: SurveyBuilderProps) {
 								onClick={() => {
 									setSelectedId(q.id)
 									setTab("question")
+									setMobilePanel("editor")
 								}}
 								className={cn(
 									"glass rounded-xl p-3 cursor-pointer group transition-all text-left w-full",
@@ -277,7 +316,12 @@ export function SurveyBuilder({ survey, onSurveyChange }: SurveyBuilderProps) {
 				</div>
 
 				{/* Right panel: editor + branding */}
-				<div className="flex-1 glass rounded-xl overflow-hidden min-h-[500px]">
+				<div
+					className={cn(
+						"flex-1 glass overflow-hidden min-h-100 md:min-h-125",
+						mobilePanel !== "editor" && "hidden md:block",
+					)}
+				>
 					{/* Tab bar */}
 					<div className="flex border-b border-border">
 						<button

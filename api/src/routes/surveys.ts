@@ -170,7 +170,17 @@ surveyRoutes.delete("/:id", async (c) => {
 		.first()
 	if (!existing) return c.json({ error: "Survey not found" }, 404)
 
-	await db.prepare("DELETE FROM surveys WHERE id = ?").bind(surveyId).run()
+	// D1 local dev doesn't enforce ON DELETE CASCADE, so delete child rows explicitly
+	await db.batch([
+		db
+			.prepare(
+				"DELETE FROM response_answers WHERE response_id IN (SELECT id FROM responses WHERE survey_id = ?)",
+			)
+			.bind(surveyId),
+		db.prepare("DELETE FROM responses WHERE survey_id = ?").bind(surveyId),
+		db.prepare("DELETE FROM questions WHERE survey_id = ?").bind(surveyId),
+		db.prepare("DELETE FROM surveys WHERE id = ?").bind(surveyId),
+	])
 
 	return c.body(null, 204)
 })
